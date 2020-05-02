@@ -43,8 +43,6 @@
     <link rel="stylesheet" type="text/css" href="<?= $css ?>Stylesheet.css">
 
 
-    <!-- JS Here-->
-
     
 </head>
 
@@ -374,21 +372,75 @@
 
 <!--All User end -->
 
+<!-- Wating Orders start -->
+
+<div class="panel panel-default" >
+        <div class="panel-heading">
+            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Wating Orders<i class="fa fa-caret-down"></i></a></h4>
+        </div>
+
+	        <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" >
+	            <div class="panel-body">
+
+                <p style="color: orange" class="login_p"> *Here You can Show Waiting Orders and change it's statue from dropdown list* </p>
+
+                <table border="1" style="border-color:gray ; width:1200px ; text-align: center; margin-left: 35px ;margin-top: -30px"   >
+                    <thead style="font-family: 'East Sea Dokdo', cursive; font-size: 25px">
+                        <tr style="background-color:#F54300 ;color:white;"> 
+                                <th style="text-align: center;width: 5px">Order ID</th>
+                                <th style="text-align: center;width: 5px">Customer ID</th>
+			                    <th style="text-align: center;">Order Desc.</th>
+			                    <th style="text-align: center;">Date</th>
+			                    <th style="text-align: center;">Total Cost</th>
+			                    <th style="text-align: center;">Statue</th>
+			                </tr>
+			            </thead>
+
+		                <tbody>
+			                <tr class = "tabelrow">
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1 $</td>
+                                <td style="width: 19%">
+	                                <div class="col-sm-10" style="padding: px">
+	                                    <select name = "Statue" id = "Statue" style="width: 120%;height: 35px ;font-family: 'Bellota';font-size: 20px;color: black;border: 0px; ">
+	                                            <option value="Waiting" disabled selected >Waiting</option>
+	                                            <option value="Delivered" >Delivered</option>
+	                                            <option value="Canceled" >Canceled</option>
+	                                    </select>
+	                                </div>
+                            	</td>
+			                </tr>
+                            </br>      
+                            
+                        </tbody>	
+                    </table>
+                    </br> 
+	            </div>
+
+			</div>
+   </div>
+
+
+<!-- Wating orders end -->
+
 <!-- All Orders start -->
 
   <div class="panel panel-default" style="margin-bottom: 50px ">
         <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">ORDERS <i class="fa fa-caret-down"></i></a></h4>
+            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">ORDERS History<i class="fa fa-caret-down"></i></a></h4>
         </div>
-	        <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
+	        <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" >
 	            <div class="panel-body">
-
-                <table border="1" style="border-color:gray ; width:1200px ; text-align: center; margin-left: 35px; margin-top: -90px"   >
+                 
+                <table border="1" style="border-color:gray ; width:1200px ; text-align: center; margin-left: 35px ;margin-top: 0px"   >
                     <thead style="font-family: 'East Sea Dokdo', cursive; font-size: 25px">
                         <tr style="background-color:#F54300 ;color:white;"> 
-			                    <th style="text-align: center;">Order ID</th>
+                                <th style="text-align: center;width: 5px">Order ID</th>
+                                <th style="text-align: center;width: 5px">Customer ID</th>
 			                    <th style="text-align: center;">Order Desc.</th>
-			                    <th style="text-align: center;">Customer ID</th>
 			                    <th style="text-align: center;">Date</th>
 			                    <th style="text-align: center;">Total Cost</th>
 			                    <th style="text-align: center;">Statue</th>
@@ -397,75 +449,18 @@
 			            </thead>
 
 		                <tbody>
-
 			                <tr class = "tabelrow">
-			                <td style='text-align:center'>1</td>
-			                <td style='text-align:center'>2 of Po(2)</td>
-			                <td style='text-align:center'>7</td>
-			                <td style='text-align:center'>25/3/2020</td>
-			                <td style='text-align:center'>30$</td>
-                             <td style="width: 19%">
-                                <div class="col-sm-10" style="padding: px">
-                                    <select name = "Statue" style="width: 120%;height: 35px ;font-family: 'Bellota';font-size: 20px;color: black;border: 0px; ">
-                                          <option >Delivered</option>
-                                          <option >Yet to be delivered</option>
-                                    </select>
-                                </div>
-                            </td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1</td>
+                                <td style='text-align:center'>1 $</td>
+			                    <th style="text-align: center;">Statue</th>
 			                </tr>
-			            	</br>
-
-			            	<tr class = "tabelrow">
-			                <td style='text-align:center'>2</td>
-			                <td style='text-align:center'>3 of Po(5)</td>
-			                <td style='text-align:center'>8</td>
-			                <td style='text-align:center'>31/3/2020</td>
-			                <td style='text-align:center'>95$</td>
-			                <td style='text-align:center'>delivered</td>
-			                </tr>
-			            	</br>
-
-			            	<tr class = "tabelrow">
-			                <td style='text-align:center'>3</td>
-			                <td style='text-align:center'>1 of Po(3) &1 of Po(7) </td>
-			                <td style='text-align:center'>8</td>
-			                <td style='text-align:center'>25/3/2020</td>
-			                <td style='text-align:center'>47$</td>
-			                <td style='text-align:center'>Delivered</td>
-			                </tr>
-			            	</br>
-
-			            	<tr class = "tabelrow">
-			                <td style='text-align:center'>4</td>
-			                <td style='text-align:center'>1 of Po(4)</td>
-			                <td style='text-align:center'>7</td>
-			                <td style='text-align:center'>27/3/2020</td>
-			                <td style='text-align:center'>20$</td>
-			                <td style='text-align:center'>Delivered</td>
-			                </tr>
-			            	</br>
-
-			            	<tr class = "tabelrow">
-			                <td style='text-align:center'>5</td>
-			                <td style='text-align:center'>4 of Po(2) & 2 of Po(3)</td>
-			                <td style='text-align:center'>7</td>
-			                <td style='text-align:center'>25/3/2020</td>
-			                <td style='text-align:center'>103$</td>
-			                <td style='text-align:center'> delivered</td>
-			                </tr>
-			            	</br>
-
-			            </tbody>	
+                        </tbody>	
 	                </table>
-
+                           
                     </br> 
-                    <div class="form-group">        
-                              <div class="col-sm-offset-2 col-sm-10" style="margin-left: 650px">
-                               <button type="submit" class="btn btn-default">Save Changes</button>
-                           </div>
-                    </div>
-
-
 	            </div>
 
 			</div>
