@@ -1,15 +1,27 @@
 <?php 
+    /**                         Singleton class
+     * 
+     * The Singleton class defines the `GetInstance` method that serves as an
+     * alternative to constructor and lets clients access the same instance of this
+     * class over and over.
+     * 
+    */
+
 class Db_Control
 {
-
+    // Hold the class instance.
+    private static $instance = null ;
+   
     protected $_config = array();//store connection configuration
     protected $link; //store connection
     protected $_result; //store result from select statement
 
     /*
     *Constructor
+    * The Singleton's constructor should always be private to prevent direct
+    *   construction calls with the `new` operator.
     */
-    public function __construct(array $config)
+    private function __construct(array $config)
     {
         if(count($config) != 4)
         {
@@ -17,6 +29,23 @@ class Db_Control
         }
         $this->_config = $config;
     }
+
+     /**
+     * This is the static method that controls the access to the singleton
+     * instance. On the first run, it creates a singleton object and places it
+     * into the static field. On subsequent runs, it returns the DB existing
+     * object stored in the static field.
+     */
+    public static function getInstance($config)
+    {
+        if(!isset(self::$instance))
+        {
+            self::$instance = new Db_Control($config);
+        }
+
+        return self::$instance;
+    }
+
     /*
     * connect to Mysql
     */
@@ -29,7 +58,7 @@ class Db_Control
 
             if(!$this->link = @mysqli_connect($host,$username,$password,$database))
             {
-                throw new RuntimeException('Error connecting to the server : '.mysqli_connect_error());
+                die('Error connecting to the server : '.mysqli_connect_error());
             }
             unset ($host,$username,$password,$database);
         }
@@ -42,13 +71,13 @@ class Db_Control
     {
         if(!is_string($query) || empty($query))
         {
-            throw new InvalidArgumentException('The spicified query is not valid');
+            die('The spicified query is not valid');
         }
         //lazy connect to Mysql
         $this->connect();
         if(!$this->_result = mysqli_query($this->link,$query))
         {
-            throw new RuntimeException('Error executing the spicified query'.$query.'Error is :: '.mysqli_connect_error());
+            die('Error executing the spicified query'.$query.'Error is :: '.mysqli_connect_error());
         } 
         return $this->_result;
     }
@@ -144,8 +173,7 @@ class Db_Control
     /*
     *   Fetch a single row from the current result set  (as an associative array)
     */
-    public function fetch()
-    {
+    public function fetch() {
         if ($this-> _result != null)
         {
             if(($row = mysqli_fetch_array($this->_result , MYSQLI_ASSOC)) === false)
@@ -161,8 +189,7 @@ class Db_Control
     /*
     *   Fetch all rows from the current result set  (as an associative array)
     */
-    public function fetchAll()
-    {
+    public function fetchAll() {
         if ($this-> _result != null)
         {
             if(($all = mysqli_fetch_all($this->_result , MYSQLI_ASSOC)) === false)
@@ -183,8 +210,6 @@ class Db_Control
     {
         return $this->link !== null ? mysqli_insert_id($this->link) : null ;
     }
-
-    
 
     /*
     * Get the number of rows returned by the current result set 

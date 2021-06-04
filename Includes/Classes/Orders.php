@@ -4,10 +4,13 @@
     require_once 'config.php';
     require_once 'Db_Control.php';
 
-    class orders extends Db_Control{
+    class orders 
+    {
+    //get instance of db control(singltone class)
+    protected $DB;
 
     //set the table name
-    protected string $_table = 'orders';	// This is the name of the table on DB
+    protected  $_table = 'orders';	// This is the name of the table on DB
 
     //Attributes
     private $Order_Id ;
@@ -21,12 +24,11 @@
 
     public function __construct()
     {
-
         // Add from config.php file
         global $config;
 
-        // Call the Db_Control constructor
-        parent::__construct($config);
+        //get instance of db control(singltone class)
+        $this->DB = Db_Control::getInstance($config);
     }
 
     //Setters $$ Getters
@@ -100,8 +102,8 @@
     */  
     public function getFinishedOrders()
     {
-        $this->select($this->_table,' Order_Statue <> \'Waiting\' ','*','Order_Date' , ' DESC ');
-        return $this->fetchAll();
+        $this->DB->select($this->_table,' Order_Statue <> \'Waiting\' ','*','Order_Date' , ' DESC ');
+        return  $this->DB->fetchAll();
     }
 
     /*
@@ -112,8 +114,8 @@
 
     public function getOrders($usr_Id)
     {
-        $this->select($this->_table , ' Cust_Id = '.$usr_Id , '*' , 'Order_Date' , ' DESC ');
-        return $this->fetchAll(); 
+        $this->DB->select($this->_table , ' Cust_Id = '.$usr_Id , '*' , 'Order_Date' , ' DESC ');
+        return  $this->DB->fetchAll(); 
     }
 
     /*
@@ -123,21 +125,19 @@
 
     public function getWatingOrders()
     {
-        $this->select($this->_table , ' Order_Statue = \'Waiting\'' , '*' , 'Order_Date' , ' ASC ');
-        return $this->fetchAll();
+        $this->DB->select($this->_table , ' Order_Statue = \'Waiting\'' , '*' , 'Order_Date' , ' ASC ');
+        return  $this->DB->fetchAll();
     }
 
     /*
     *  Show all orders that not delivered yet for spicified user
     *  @return array 
     */
-
     public function getWatingOrdersForUser($user_Id)
     {
-        $this->select($this->_table , ' Cust_Id = ' . $user_Id . ' AND Order_Statue = \'Waiting\'' , '*' , 'Order_Date' , ' ASC ');
-        return $this->fetchAll(); 
+        $this->DB->select($this->_table , ' Cust_Id = ' . $user_Id . ' AND Order_Statue = \'Waiting\'' , '*' , 'Order_Date' , ' ASC ');
+        return  $this->DB->fetchAll(); 
     }
-
     /**
      *Place New Order
      * @param array $user_data Associative array containing column and value
@@ -145,9 +145,8 @@
      */
     public function placeOrder($data)
     {
-        return $this->insert($this->_table,$data);
+        return  $this->DB->insert($this->_table,$data);
     }
-
     /**
      *Add order details
      * @param array $data Associative array containing column and value
@@ -155,9 +154,8 @@
      */
     public function setOrderData($data)
     {
-        return $this->insert('orders_details',$data);
+        return $this->DB->insert('orders_details',$data);
     }   
-
     /**
      *change Order Statue
      * @param array $data Associative array containing column and value
@@ -168,7 +166,7 @@
         //prepare to update statement
         $data = array("Order_Statue"  => $Stat);
 
-        return $this->update($this->_table , $data , ' Order_Id = '.$order_Id);
+        return $this->DB->update($this->_table , $data , ' Order_Id = '.$order_Id);
     }
 
     /**
@@ -179,7 +177,7 @@
     public function Filter_Orders($from_date , $to_date)
     {
         $query ="SELECT * FROM orders WHERE  Order_Statue <> 'Waiting' AND  Order_Date BETWEEN '" . $from_date ."' AND '" .$to_date ."'  ORDER BY Order_Date ASC";
-        $this->query($query);
-        return $this->fetchAll();
+        $this->DB->query($query);
+        return  $this->DB->fetchAll();
     }
 }

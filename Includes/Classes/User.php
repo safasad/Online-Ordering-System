@@ -2,16 +2,9 @@
     require_once 'Person.php';
 class User extends person
 {
-    //Attributes
-    public $product ;
-    public $order;
-    
     public function __construct() 
     {
-        //taking object from clsss Products to use its function 
-        $this->product = new products();
-        $this->order = new orders();
-
+        //call the parent constructor
     	parent::__construct();
     }
 
@@ -23,7 +16,7 @@ class User extends person
      */
     public function updateUser($user_data , $user_Id)
     {
-        return $this->update($this->_table , $user_data , 'Id = ' . $user_Id);
+        return $this->DB->update($this->_table , $user_data , 'Id = ' . $user_Id);
 
     }
 
@@ -45,8 +38,7 @@ class User extends person
      * @param array $user_data Associative array containing column and value
      * @return bool Returns true if added successfully
      */
-    public function placeOrder($data)
-    {
+    public function placeOrder($data){
         return $this->order->placeOrder($data);
     }
 
